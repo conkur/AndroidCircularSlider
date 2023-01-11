@@ -3,8 +3,8 @@ package com.github.Mindinventory.circularslider
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import com.github.Mindinventory.circularslider.ui.theme.CircularSliderTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CircularSliderTheme {
-                Surface(color = MaterialTheme.colors.background) {
+                Surface(color = MaterialTheme.colorScheme.background) {
                     MiProjectPlanning()
                 //...
 
