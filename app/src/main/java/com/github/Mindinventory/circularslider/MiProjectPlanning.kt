@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
@@ -30,6 +31,8 @@ import com.github.Mindinventory.circularslider.ui.theme.DeepGray
 import com.github.Mindinventory.circularslider.ui.theme.LightGray
 import com.github.Mindinventory.circularslider.ui.theme.TextWhite
 import com.github.Mindinventory.circularslider.util.CommonToolbar
+import java.math.BigDecimal
+import java.math.RoundingMode
 import kotlin.math.roundToInt
 
 @Composable
@@ -215,6 +218,9 @@ fun cardShapeFor(messageItem: ChatModel): Shape {
 fun WeeklyUpdateItem(
     weekDay: String = "Monday", staticProgress: Float = 0f
 ) {
+    var value by remember { mutableStateOf(0f) }
+    var maxNumber = 16
+
     Column(
         modifier = Modifier
             .padding(top = 10.dp)
@@ -233,13 +239,16 @@ fun WeeklyUpdateItem(
                 percentageFontSize = 8.sp,
                 progressWidth = 20f,
                 thumbRadius = 10f,
-                isDisabled = true,
+                isDisabled = false,
                 staticProgress = staticProgress,
-                tickColor = Color.White,
+                tickColor = Color(0xFF029456),
                 tickhighlightedColor = Color.Gray,
-                currentProgressToBeReturned = { currentValueReturned ->
-
+                progressColor = Brush.sweepGradient(colors = listOf(Color.White, Color.Green, Color.Green, Color.Yellow, Color.Yellow, Color.Yellow, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red)),
+                currentProgressToBeReturned = { percentage ->
+                    value = (maxNumber * (percentage / 100.0f))
                 },
+                currentUpdatedValue = "${BigDecimal(value.toString()).setScale(1, RoundingMode.HALF_EVEN)}/$maxNumber",
+                numLines = 16,
 //                currentUpdatedValue = currentValue
             )
         }

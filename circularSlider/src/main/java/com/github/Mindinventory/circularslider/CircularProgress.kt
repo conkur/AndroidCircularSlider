@@ -55,6 +55,7 @@ import kotlin.math.*
  * @param trackWidth width of the track
  * @param isDisabled Flag to set enabled/disabled circular slider
  * @param staticProgress Static progress in case if isDisabled is true
+ * @param numLines Number of lines (ticks) to be drawn on the slider
  */
 
 @Composable
@@ -70,6 +71,7 @@ fun CircularProgressBar(
     thumbRadius: Float = 40f,
     tickColor: Color = SkyBlue,
     tickhighlightedColor: Color = TextWhite,
+    shouldHighlightTick: (Int) -> Boolean = { tickNum -> tickNum % 5 == 0}, // Highlight the tick at <tickNum> if this returns true
     dialColor: Color = DullPurple,
     progressColor: Brush = Brush.linearGradient(colors = listOf(SkyBlue, Color.White)),
     startThumbCircleColor: List<Color> = listOf(SkyBlue, SkyBlue),
@@ -83,6 +85,7 @@ fun CircularProgressBar(
     currentUpdatedValue: String = "",
     onTouchEnabled: Boolean = true,
     onDragEnabled: Boolean = true,
+    numLines: Int = 20,
 ) {
     var radius by remember {
         mutableStateOf(0f)
@@ -216,11 +219,8 @@ fun CircularProgressBar(
                 )
             }
 
-            for (i in 0..20) {
-                val lineType = when {
-                    i % 5 == 0 -> ClockLineType.Hours
-                    else -> ClockLineType.Minutes
-                }
+            for (i in 0..numLines) {
+                val lineType = if (shouldHighlightTick(i)) ClockLineType.Hours else ClockLineType.Minutes
                 val lineLength = when (lineType) {
                     ClockLineType.Minutes -> 8.dp.toPx()
                     ClockLineType.Hours -> 12.dp.toPx()
@@ -229,7 +229,7 @@ fun CircularProgressBar(
                     ClockLineType.Hours -> tickColor
                     ClockLineType.Minutes -> tickhighlightedColor
                 }
-                val angleInRad = i * (360f / 60f) * (PI.toFloat() / 20f)
+                val angleInRad = i * (360f / 60f) * (PI.toFloat() / numLines.toFloat())
                 val lineStart = Offset(
                     x = (radiusCircle.toPx() - lineLength) * cos(angleInRad) + center.x,
                     y = (radiusCircle.toPx() - lineLength) * sin(angleInRad) + center.y
