@@ -8,8 +8,10 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
@@ -157,11 +159,13 @@ fun MessageCard(
         Card(
             modifier = Modifier.widthIn(max = 340.dp),
             shape = cardShapeFor(messageItem),
-            backgroundColor = when (messageItem.userType) {
-                0 -> TextWhite
-                1 -> LightGray
-                else -> LightGray
-            },
+            colors = CardDefaults.cardColors(
+                    containerColor = when (messageItem.userType) {
+                        0 -> TextWhite
+                        1 -> LightGray
+                        else -> LightGray
+                    },
+            ),
         ) {
             Row(
                 modifier = Modifier
