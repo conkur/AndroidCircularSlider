@@ -45,7 +45,7 @@ import kotlin.math.*
  * @param strokeCap to set strokes of the ends
  * @param thumbRadius to set the radius of the thumb
  * @param tickColor to set the color of the minute-like clock arms
- * @param tickhighlightedColor to set the color of the hour-like clock arms
+ * @param tickHighlightedColor to set the color of the hour-like clock arms
  * @param dialColor  dial color
  * @param progressColor color of the progress bar
  * @param startThumbCircleColor Initial thumb color
@@ -70,7 +70,9 @@ fun CircularProgressBar(
     strokeCap: StrokeCap = StrokeCap.Round,
     thumbRadius: Float = 40f,
     tickColor: Color = SkyBlue,
-    tickhighlightedColor: Color = TextWhite,
+    colorForTick: ((Int) -> Color)?,
+    tickHighlightedColor: Color = TextWhite,
+    colorForHighlightedTick: ((Int) -> Color)?,
     shouldHighlightTick: (Int) -> Boolean = { tickNum -> tickNum % 5 == 0}, // Highlight the tick at <tickNum> if this returns true
     dialColor: Color = DullPurple,
     progressColor: Brush = Brush.linearGradient(colors = listOf(SkyBlue, Color.White)),
@@ -226,8 +228,8 @@ fun CircularProgressBar(
                     ClockLineType.Hours -> 12.dp.toPx()
                 }
                 val lineColor = when (lineType) {
-                    ClockLineType.Hours -> tickColor
-                    ClockLineType.Minutes -> tickhighlightedColor
+                    ClockLineType.Hours -> if (colorForTick == null) tickColor else colorForTick(i)
+                    ClockLineType.Minutes -> if (colorForHighlightedTick == null) tickHighlightedColor else colorForHighlightedTick(i)
                 }
                 val angleInRad = i * (360f / 60f) * (PI.toFloat() / numLines.toFloat())
                 val lineStart = Offset(

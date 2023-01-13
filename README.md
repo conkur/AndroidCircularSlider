@@ -25,7 +25,7 @@ Create Highly Customizable Circular Slider made with Jetpack compose
 | ```strokeCap``` | To set strokes of the ends                |
 | ```thumbRadius``` | To set the radius of the thumb            |
 | ```tickColor``` | To set the color of the minute-like clock arms | 
-| ```tickhighlightedColor``` | To set the color of the hour-like clock arms | 
+| ```tickHighlightedColor``` | To set the color of the hour-like clock arms | 
 | ```dialColor``` | Dial color                                |
 | ```progressColor``` | Color of the progress bar                 |
 | ```startThumbCircleColor``` | Initial thumb color                       |
@@ -67,7 +67,7 @@ fun CircularProgressBar(
     strokeCap: StrokeCap = StrokeCap.Round,
     thumbRadius: Float = 40f,
     tickColor: Color = SkyBlue,
-    tickhighlightedColor: Color = TextWhite,
+    tickHighlightedColor: Color = TextWhite,
     dialColor: Color = DullPurple,
     progressColor: Brush = Brush.linearGradient(colors = listOf(SkyBlue, Color.White)),
     startThumbCircleColor: List<Color> = listOf(SkyBlue, SkyBlue),

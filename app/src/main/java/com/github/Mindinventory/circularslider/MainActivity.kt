@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                             thumbRadius = 20f,
 
                             tickColor = Color.White,
-                            tickhighlightedColor = Color.Gray,
+                            tickHighlightedColor = Color.Gray,
                             currentProgressToBeReturned = { currentValueReturned ->
                                 currentValue = currentValueReturned
                             },
