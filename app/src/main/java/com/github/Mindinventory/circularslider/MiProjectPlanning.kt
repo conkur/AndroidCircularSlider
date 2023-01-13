@@ -125,7 +125,7 @@ fun MiProjectPlanning() {
                         progressWidth = 20f,
                         thumbRadius = 14f,
                         tickColor = Color.White,
-                        tickhighlightedColor = Color.Gray,
+                        tickHighlightedColor = Color.Gray,
                         currentProgressToBeReturned = { currentPercentageReturned ->
                             currentPercentage = currentPercentageReturned
                         },
@@ -242,7 +242,7 @@ fun WeeklyUpdateItem(
                 isDisabled = false,
                 staticProgress = staticProgress,
                 tickColor = Color(0xFF029456),
-                tickhighlightedColor = Color.Gray,
+                tickHighlightedColor = Color.Gray,
                 progressColor = Brush.sweepGradient(colors = listOf(Color.White, Color.Green, Color.Green, Color.Yellow, Color.Yellow, Color.Yellow, Color.Red, Color.Red, Color.Red, Color.Red, Color.Red)),
                 currentProgressToBeReturned = { percentage ->
                     value = (maxNumber * (percentage / 100.0f))
